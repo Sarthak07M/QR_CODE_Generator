@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Generator</title>
+
+    <!--
+      Google font for a modern visual style.
+      You can swap this to any font you prefer.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="card" aria-labelledby="title">
+        <p class="eyebrow">Smart Utility</p>
+        <h1 id="title">QR Code Generator</h1>
+        <p class="subtitle">
+          Enter text or a URL, generate a QR code instantly, and download it as a PNG.
+        </p>
+
+        <div class="form-group">
+          <label for="qr-input">Text or URL</label>
+          <input
+            id="qr-input"
+            type="text"
+            placeholder="Example: https://example.com"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="actions">
+          <button id="generate-btn" type="button">Generate QR</button>
+          <button id="download-btn" type="button" disabled>Download PNG</button>
+        </div>
+
+        <!--
+          Status text helps users know what is happening (loading, errors, success).
+        -->
+        <p id="status-message" class="status" aria-live="polite"></p>
+
+        <div id="qr-output" class="qr-output" aria-live="polite">
+          <!--
+            Spinner appears while the QR image is being created.
+            It is hidden when generation finishes.
+          -->
+          <div id="loader" class="loader hidden" aria-hidden="true"></div>
+
+          <!--
+            The QR code image will be inserted here once generated.
+          -->
+          <img id="qr-image" alt="Generated QR code" class="hidden" />
+        </div>
+      </section>
+    </main>
+
+    <!--
+      App logic in script.js calls a QR image API endpoint and renders the returned PNG.
+    -->
+    <script src="script.js"></script>
+  </body>
+</html>
