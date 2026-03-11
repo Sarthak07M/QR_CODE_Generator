@@ -20,18 +20,25 @@
         <p class="eyebrow">Smart Utility</p>
         <h1 id="title">QR Code Generator</h1>
         <p class="subtitle">
-          Enter text or a URL, generate a QR code instantly, and download it as a PNG.
+          Select QR type, fill details, generate instantly, and download as PNG.
         </p>
 
         <div class="form-group">
-          <label for="qr-input">Text or URL</label>
-          <input
-            id="qr-input"
-            type="text"
-            placeholder="Example: https://example.com"
-            autocomplete="off"
-          />
+          <label for="qr-type">Select QR Type</label>
+          <select id="qr-type">
+            <option value="website">Website URL</option>
+            <option value="phone">Phone Number</option>
+            <option value="email">Email</option>
+            <option value="sms">SMS</option>
+            <option value="wifi">WiFi</option>
+            <option value="upi">UPI Payment</option>
+            <option value="contact">Contact (vCard)</option>
+            <option value="location">Google Maps Location</option>
+          </select>
         </div>
+
+        <!-- Dynamic inputs for the selected QR type are inserted here. -->
+        <div id="dynamic-fields" class="dynamic-fields"></div>
 
         <div class="actions">
           <button id="generate-btn" type="button">Generate QR</button>
@@ -40,16 +47,20 @@
 
         <p id="status-message" class="status" aria-live="polite"></p>
 
+        <p class="payload-label">Generated QR Value</p>
+        <pre id="payload-preview" class="payload-preview">No value generated yet.</pre>
+
         <div id="qr-output" class="qr-output" aria-live="polite">
-          
           <div id="loader" class="loader hidden" aria-hidden="true"></div>
 
-          <img id="qr-image" alt="Generated QR code" class="hidden" />
+          <!-- qrcode.js draws canvas/img content inside this box. -->
+          <div id="qr-container" class="qr-container" aria-label="Generated QR code"></div>
         </div>
       </section>
     </main>
 
-    
+    <!-- qrcode.js library for QR generation in browser. -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
