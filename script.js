@@ -1,4 +1,4 @@
-// Core UI elements used across the app.
+
 const qrTypeSelect = document.getElementById("qr-type");
 const dynamicFields = document.getElementById("dynamic-fields");
 const generateBtn = document.getElementById("generate-btn");
@@ -10,7 +10,6 @@ const qrContainer = document.getElementById("qr-container");
 
 let qrInstance = null;
 
-// Fallback script locations for qrcode.js if one CDN fails.
 const qrLibraryFallbackUrls = [
   "https://unpkg.com/qrcodejs@1.0.0/qrcode.min.js",
   "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
@@ -18,7 +17,6 @@ const qrLibraryFallbackUrls = [
 
 let qrLibraryLoadPromise = null;
 
-// Metadata for each QR type and the fields required to build its payload.
 const qrTypeConfig = {
   website: {
     fields: [
@@ -76,9 +74,7 @@ const qrTypeConfig = {
   }
 };
 
-/**
- * Shows helper or error messages under the form.
- */
+
 function setStatus(message, type = "") {
   statusMessage.textContent = message;
   statusMessage.className = "status";
@@ -88,16 +84,10 @@ function setStatus(message, type = "") {
   }
 }
 
-/**
- * Escapes characters used by WiFi payload format.
- */
 function escapeWifiValue(value) {
   return String(value).replace(/([\\;,:\"])/g, "\\$1");
 }
 
-/**
- * Escapes line breaks and commas for vCard values.
- */
 function escapeVCardValue(value) {
   return String(value)
     .replace(/,/g, "\\,")
@@ -105,9 +95,7 @@ function escapeVCardValue(value) {
     .replace(/\n/g, "\\n");
 }
 
-/**
- * Ensure URL starts with protocol for website QR type.
- */
+
 function normalizeUrl(url) {
   const trimmed = url.trim();
 
@@ -118,9 +106,7 @@ function normalizeUrl(url) {
   return `https://${trimmed}`;
 }
 
-/**
- * Build dynamic inputs whenever QR type changes.
- */
+
 function renderDynamicFields() {
   const selectedType = qrTypeSelect.value;
   const config = qrTypeConfig[selectedType];
@@ -166,9 +152,7 @@ function renderDynamicFields() {
   });
 }
 
-/**
- * Reads current values from dynamic form fields.
- */
+
 function getFormValues() {
   const values = {};
   const inputs = dynamicFields.querySelectorAll("input, select, textarea");
@@ -180,9 +164,6 @@ function getFormValues() {
   return values;
 }
 
-/**
- * Validates required fields according to the selected type configuration.
- */
 function validateValues(type, values) {
   const config = qrTypeConfig[type];
 
@@ -195,10 +176,6 @@ function validateValues(type, values) {
   return "";
 }
 
-/**
- * Create final payload string exactly in the standard format
- * for each QR type.
- */
 function buildQrPayload(type, values) {
   switch (type) {
     case "website":
@@ -281,9 +258,7 @@ function buildQrPayload(type, values) {
   }
 }
 
-/**
- * Dynamically load fallback qrcode.js script if primary script failed.
- */
+
 function loadScript(src) {
   return new Promise((resolve, reject) => {
     const script = document.createElement("script");
@@ -297,9 +272,7 @@ function loadScript(src) {
   });
 }
 
-/**
- * Make sure QRCode class exists before trying to generate.
- */
+
 async function ensureQrLibraryLoaded() {
   if (window.QRCode) {
     return;
@@ -326,9 +299,6 @@ async function ensureQrLibraryLoaded() {
   await qrLibraryLoadPromise;
 }
 
-/**
- * Renders QR code into #qr-container using qrcode.js.
- */
 async function generateQrCode() {
   const type = qrTypeSelect.value;
   const values = getFormValues();
@@ -359,7 +329,6 @@ async function generateQrCode() {
   try {
     await ensureQrLibraryLoaded();
 
-    // Tiny delay so users can see loading state on very fast systems.
     await new Promise((resolve) => setTimeout(resolve, 180));
 
     qrInstance = new window.QRCode(qrContainer, {
@@ -383,10 +352,6 @@ async function generateQrCode() {
   }
 }
 
-/**
- * Download rendered QR as PNG.
- * qrcode.js usually generates a <canvas>, which can be exported directly.
- */
 function downloadQrCode() {
   const canvas = qrContainer.querySelector("canvas");
 
@@ -399,7 +364,6 @@ function downloadQrCode() {
     return;
   }
 
-  // Fallback path if library produced an <img> instead of <canvas>.
   const image = qrContainer.querySelector("img");
 
   if (image && image.src) {
@@ -413,7 +377,6 @@ function downloadQrCode() {
   setStatus("Generate a QR code before downloading.", "error");
 }
 
-// Update fields when type changes.
 qrTypeSelect.addEventListener("change", () => {
   renderDynamicFields();
   payloadPreview.textContent = "No value generated yet.";
@@ -422,12 +385,9 @@ qrTypeSelect.addEventListener("change", () => {
   downloadBtn.disabled = true;
 });
 
-// Create QR on button click.
 generateBtn.addEventListener("click", generateQrCode);
 
-// Download QR as PNG.
 downloadBtn.addEventListener("click", downloadQrCode);
 
-// Initial UI render on page load.
 renderDynamicFields();
 setStatus("Choose a QR type and fill details.");

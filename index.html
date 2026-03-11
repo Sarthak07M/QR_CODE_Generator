@@ -37,7 +37,6 @@
           </select>
         </div>
 
-        <!-- Dynamic inputs for the selected QR type are inserted here. -->
         <div id="dynamic-fields" class="dynamic-fields"></div>
 
         <div class="actions">
@@ -53,13 +52,11 @@
         <div id="qr-output" class="qr-output" aria-live="polite">
           <div id="loader" class="loader hidden" aria-hidden="true"></div>
 
-          <!-- qrcode.js draws canvas/img content inside this box. -->
           <div id="qr-container" class="qr-container" aria-label="Generated QR code"></div>
         </div>
       </section>
     </main>
 
-    <!-- qrcode.js library for QR generation in browser. -->
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script src="script.js"></script>
   </body>
