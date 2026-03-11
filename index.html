@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QR Code Generator</title>
 
-    <!--
-      Google font for a modern visual style.
-      You can swap this to any font you prefer.
-    -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -42,29 +38,18 @@
           <button id="download-btn" type="button" disabled>Download PNG</button>
         </div>
 
-        <!--
-          Status text helps users know what is happening (loading, errors, success).
-        -->
         <p id="status-message" class="status" aria-live="polite"></p>
 
         <div id="qr-output" class="qr-output" aria-live="polite">
-          <!--
-            Spinner appears while the QR image is being created.
-            It is hidden when generation finishes.
-          -->
+          
           <div id="loader" class="loader hidden" aria-hidden="true"></div>
 
-          <!--
-            The QR code image will be inserted here once generated.
-          -->
           <img id="qr-image" alt="Generated QR code" class="hidden" />
         </div>
       </section>
     </main>
 
-    <!--
-      App logic in script.js calls a QR image API endpoint and renders the returned PNG.
-    -->
+    
     <script src="script.js"></script>
   </body>
 </html>
