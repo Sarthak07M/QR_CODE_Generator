@@ -3,59 +3,156 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QR Code Generator</title>
+    <title>QuickQR - Create QR Codes in Seconds</title>
+    <meta
+      name="description"
+      content="QuickQR is a fast, free, and easy QR code generator with logo support, color customization, and instant download."
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-size='30' font-family='Arial' fill='white'%3EQ%3C/text%3E%3C/svg%3E"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <main class="page">
-      <section class="card" aria-labelledby="title">
-        <p class="eyebrow">Smart Utility</p>
-        <h1 id="title">QR Code Generator</h1>
-        <p class="subtitle">
-          Select QR type, fill details, generate instantly, and download as PNG.
+  <body class="page-home">
+    <div class="bg-glow glow-a" aria-hidden="true"></div>
+    <div class="bg-glow glow-b" aria-hidden="true"></div>
+    <div class="site-shell">
+      <header class="navbar">
+        <a href="index.html" class="brand" aria-label="QuickQR home">
+          <span class="brand-mark">Q</span>
+          <span class="brand-text">QuickQR</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html" class="active">Home</a>
+          <a href="about.html">About</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </nav>
+      </header>
+
+      <main class="page-content">
+        <section class="hero">
+          <p class="eyebrow">Free SaaS-Style Utility</p>
+          <h1>Create QR Codes in Seconds</h1>
+          <p>Fast, free, and easy QR generation</p>
+          <div class="badge-row" aria-label="Product highlights">
+            <span class="badge">No Signup Required</span>
+            <span class="badge">Privacy Safe</span>
+          </div>
+          <div class="hero-metrics" aria-label="QuickQR highlights">
+            <div class="metric">
+              <strong>4 Types</strong>
+              <span>URL, WiFi, Email, Phone</span>
+            </div>
+            <div class="metric">
+              <strong>Live Preview</strong>
+              <span>Instant visual updates</span>
+            </div>
+            <div class="metric">
+              <strong>Export Ready</strong>
+              <span>Download + copy image</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="ad-slot top-ad" aria-label="Top advertisement placeholder">
+          <p>Top Banner Ad Placeholder (728x90)</p>
+        </section>
+
+        <section class="card generator-card" aria-labelledby="title">
+          <h2 id="title">QR Generator Tool</h2>
+          <p class="subtitle">
+            Choose a QR type, customize colors, add logo, and generate instantly.
+          </p>
+
+          <div class="form-group">
+            <label for="qr-type">Select QR Type</label>
+            <select id="qr-type">
+              <option value="website">Website URL</option>
+              <option value="phone">Phone Number</option>
+              <option value="email">Email</option>
+              <option value="wifi">WiFi</option>
+            </select>
+          </div>
+
+          <div id="dynamic-fields" class="dynamic-fields"></div>
+
+          <div class="customization-grid">
+            <div class="form-group">
+              <label for="qr-color">QR Color</label>
+              <input id="qr-color" type="color" value="#0f172a" />
+            </div>
+            <div class="form-group">
+              <label for="bg-color">Background Color</label>
+              <input id="bg-color" type="color" value="#ffffff" />
+            </div>
+            <div class="form-group full-width">
+              <label for="logo-upload">QR Logo (Optional)</label>
+              <input id="logo-upload" type="file" accept="image/*" />
+              <p class="hint-text">Upload a square logo for best results.</p>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="generate-btn" type="button">Generate QR</button>
+            <button id="download-btn" type="button" disabled>Download PNG</button>
+            <button id="copy-btn" type="button" disabled>Copy QR Image</button>
+          </div>
+
+          <p id="status-message" class="status" aria-live="polite"></p>
+
+          <p class="payload-label">Generated QR Value</p>
+          <pre id="payload-preview" class="payload-preview">No value generated yet.</pre>
+
+          <div id="qr-output" class="qr-output" aria-live="polite">
+            <div id="loader" class="loader hidden" aria-hidden="true"></div>
+            <div id="qr-container" class="qr-container" aria-label="Generated QR code"></div>
+          </div>
+        </section>
+
+        <section class="ad-slot middle-ad" aria-label="Middle advertisement placeholder">
+          <p>Middle Ad Placeholder (Responsive Display Ad)</p>
+        </section>
+
+        <section class="content-section">
+          <h3>How to Use QR Code Generator</h3>
+          <p>
+            Select the QR type, fill in the required details, choose your preferred QR
+            and background colors, and optionally upload a logo. Your QR preview updates
+            live as you type. Once ready, download it as PNG or copy it directly.
+          </p>
+        </section>
+
+        <section class="content-section">
+          <h3>Why Use Our QR Tool</h3>
+          <p>
+            QuickQR is designed for creators, students, and businesses who want a clean,
+            professional, and privacy-safe way to create QR codes quickly. The interface
+            is mobile-friendly, beginner-friendly, and structured for a modern web app
+            experience.
+          </p>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>© 2026 QuickQR | All rights reserved</p>
+        <p class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="privacy.html">Privacy Policy</a>
         </p>
-
-        <div class="form-group">
-          <label for="qr-type">Select QR Type</label>
-          <select id="qr-type">
-            <option value="website">Website URL</option>
-            <option value="phone">Phone Number</option>
-            <option value="email">Email</option>
-            <option value="sms">SMS</option>
-            <option value="wifi">WiFi</option>
-            <option value="upi">UPI Payment</option>
-            <option value="contact">Contact (vCard)</option>
-            <option value="location">Google Maps Location</option>
-          </select>
-        </div>
-
-        <div id="dynamic-fields" class="dynamic-fields"></div>
-
-        <div class="actions">
-          <button id="generate-btn" type="button">Generate QR</button>
-          <button id="download-btn" type="button" disabled>Download PNG</button>
-        </div>
-
-        <p id="status-message" class="status" aria-live="polite"></p>
-
-        <p class="payload-label">Generated QR Value</p>
-        <pre id="payload-preview" class="payload-preview">No value generated yet.</pre>
-
-        <div id="qr-output" class="qr-output" aria-live="polite">
-          <div id="loader" class="loader hidden" aria-hidden="true"></div>
-
-          <div id="qr-container" class="qr-container" aria-label="Generated QR code"></div>
-        </div>
-      </section>
-    </main>
+      </footer>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script src="script.js"></script>
